@@ -1,0 +1,7 @@
+name: TopUpCards
+version: 0.0.1
+api: 4.0.0
+main: davidglitch04\TopUpCards\Main
+src-namespace-prefix: davidglitch04\TopUpCards
+author: DavidGlitch04
+website: https://github.com/David-pm-pl
