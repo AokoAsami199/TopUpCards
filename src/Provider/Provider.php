@@ -25,10 +25,20 @@ class Provider {
         $this->list = new Config($this->plugin->getDataFolder()."list.yml", Config::YAML);
     }
 
+    public function DataExists(string $username): bool{
+        if($this->list->exists($username)){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public function createData(Player $player): void{
         $username = strtolower($player->getName());
-        $this->list->set($username, 0);
-        $this->list->save();
+        if(!$this->DataExists($username)){
+            $this->list->set($username, 0);
+            $this->list->save();
+        }
     }
 
     public function getValue(Player $player): int{

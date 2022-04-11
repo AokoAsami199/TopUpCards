@@ -4,6 +4,7 @@ namespace davidglitch04\TopUpCards;
 
 use pocketmine\{
     plugin\PluginBase,
+    event\Listener,
     utils\SingletonTrait,
     Server
 };
@@ -11,8 +12,10 @@ use davidglitch04\TopUpCards\{
     Command\NapThe,
     Provider\Provider
 };
+use davidglitch04\TopUpCards\Command\TopNapThe;
+use pocketmine\event\player\PlayerJoinEvent;
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener{
 
     use SingletonTrait;
 
@@ -28,6 +31,8 @@ class Main extends PluginBase{
     {
         $this->provider->open();
         Server::getInstance()->getCommandMap()->register('napthe', new NapThe($this));
+        Server::getInstance()->getCommandMap()->register('topnapthe', new TopNapThe($this));
+        Server::getInstance()->getPluginManager()->registerEvents($this, $this);
     }
 
     protected function onDisable(): void
@@ -45,5 +50,10 @@ class Main extends PluginBase{
 
     public function getPartnerKey(): string{
         return $this->getProvider()->config->get("PartnerKey", '');
+    }
+
+    public function onJoin(PlayerJoinEvent $event){
+        $player = $event->getPlayer();
+        $this->getProvider()->createData($player);
     }
 }

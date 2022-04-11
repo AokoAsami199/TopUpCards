@@ -30,7 +30,7 @@ class PluginForm{
         return TopUpCards::getInstance();
     }
 
-    protected function openForm(Player $player){
+    private function openForm(Player $player){
        $form = new CustomForm(function (Player $player, $data){
            if(!isset($data)){
                return false;

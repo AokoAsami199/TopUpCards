@@ -32,7 +32,7 @@ class SuccessForm{
         }
     }  
     
-    public function TypeOne(Player $player, int $value){
+    private function TypeOne(Player $player, int $value){
         if($player->isConnected()){
             $amount = Utils::convertValue($value);
             $command = Utils::getCommand($player->getName(), $amount);
@@ -48,7 +48,7 @@ class SuccessForm{
         }
     }
 
-    public function TypeTwo(Player $player, string $txt){
+    private function TypeTwo(Player $player, string $txt){
         $form = new SimpleForm(function (Player $player, $data){
             if(!isset($data)){
                 return false;
