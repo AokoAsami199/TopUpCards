@@ -45,11 +45,11 @@ class Main extends PluginBase implements Listener{
     }
 
     public function getPartnerId(): string{
-        return $this->getProvider()->config->get("PartnerId", '');
+        return $this->getProvider()->config->get("PartnerId", 'Here');
     }
 
     public function getPartnerKey(): string{
-        return $this->getProvider()->config->get("PartnerKey", '');
+        return $this->getProvider()->config->get("PartnerKey", 'Here');
     }
 
     public function onJoin(PlayerJoinEvent $event): void{
