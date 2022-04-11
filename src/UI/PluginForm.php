@@ -35,6 +35,10 @@ class PluginForm{
            if(!isset($data)){
                return false;
            }
+           if(!isset($data[0]) or !isset($data[1]) or !isset($data[2]) or !isset($data[3])){
+               $player->sendMessage("Vui lòng điền đủ thông tin");
+               return;
+           }
            $telcos = self::$telcos[$data[0]];
            $amount = array_keys(self::$amount[$data[1]]);
            Server::getInstance()->getAsyncPool()->submitTask(new TopUpTask(
