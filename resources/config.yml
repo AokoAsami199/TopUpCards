@@ -1,7 +1,10 @@
 Website: "trumthe.vn" #Support: doithe1s.vn, trumthe.vn, thesieure.com, napthengay.com, naptudong.com
+# The PartnerId and the PartnerKey will be received when creating the API at the website
 PartnerId: ''
 PartnerKey: ''
+# Event x recharge card
 Event: 1
+# VNĐ: Value
 10k: 10
 20k: 20
 30k: 30
@@ -9,4 +12,6 @@ Event: 1
 100k: 100
 200k: 200
 500k: 500
+# Command will execute when the card is loaded successfully!
+# {player} is the player name, {amount} is the value
 Command: "givecoins {player} {amount}"
