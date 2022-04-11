@@ -52,7 +52,7 @@ class Main extends PluginBase implements Listener{
         return $this->getProvider()->config->get("PartnerKey", '');
     }
 
-    public function onJoin(PlayerJoinEvent $event){
+    public function onJoin(PlayerJoinEvent $event): void{
         $player = $event->getPlayer();
         $this->getProvider()->createData($player);
     }
