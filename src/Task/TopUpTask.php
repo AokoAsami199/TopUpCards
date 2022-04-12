@@ -8,8 +8,7 @@ use pocketmine\{
 };
 use davidglitch04\TopUpCards\{
     Main as TopUpCards,
-    UI\SuccessForm,
-    Utils\Utils
+    UI\SuccessForm
 };
 
 class TopUpTask extends AsyncTask{
@@ -30,7 +29,8 @@ class TopUpTask extends AsyncTask{
 
     public function onRun(): void
     {
-        $api_url = Utils::getUrl();
+        $api_url = $this->getPlugin()->getUrl();
+        $api_url = $api_url->getUrl();
 			$data_sign = md5($this->website[1] . $this->info[2] . $this->seri[3]);		
 			$arrayPost = array(
 	            "telco" => $this->info[0],
@@ -82,13 +82,13 @@ class TopUpTask extends AsyncTask{
             if($result["result"]["status"] == 99){
                 Server::getInstance()->getAsyncPool()->submitTask(new CheckTask($result["arrayPost"], $player));
 				if(is_null($player)){		
-					continue;
+					return;
 				}	
 				$player->sendTip("Checking...");
 				return;
             }
             if(is_null($player)){
-                continue;
+                return;
             }
             if($result["result"]["status"] == 4){
                 $txt = "Telcos is under maintenance!";

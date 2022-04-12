@@ -7,10 +7,7 @@ use pocketmine\{
     player\Player,
     Server 
 };
-use davidglitch04\TopUpCards\{
-    Main as TopUpCards,
-    Utils\Utils
-};
+use davidglitch04\TopUpCards\Main as TopUpCards;
 use jojoe77777\FormAPI\SimpleForm;
 
 class SuccessForm{
@@ -31,12 +28,16 @@ class SuccessForm{
             $this->TypeTwo($player, $txt);
         }
     }  
+
+    public function getPlugin(): TopUpCards{
+        return TopUpCards::getInstance();
+    }
     
     private function TypeOne(Player $player, int $value){
         if($player->isConnected()){
-            $amount = Utils::convertValue($value);
-            $command = Utils::getCommand($player->getName(), $amount);
-            $server = Server::getInstance();
+            $amount = $this->getPlugin()->convertValue($value);
+            $command = $this->getPlugin()->getCommand($player->getName(), $amount);
+            $server = new Server::getInstance();
             $server->getCommandMap()->dispatch(new ConsoleCommandSender($server, $server->getLanguage()), $command);
             TopUpCards::getInstance()->getProvider()->Add($player, $amount);
             $txt = 

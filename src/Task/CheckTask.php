@@ -9,8 +9,7 @@ use pocketmine\{
 };
 use davidglitch04\TopUpCards\{
     Main as TopUpCards,
-    UI\SuccessForm,
-    Utils\Utils
+    UI\SuccessForm
 };
 
 class checkTask extends AsyncTask
@@ -30,7 +29,7 @@ class checkTask extends AsyncTask
 
     public function onRun(): void
     {
-            $api_url = Utils::getUrl();
+            $api_url = $this->getPlugin()->getUrl();
 			$arrayPost = $this->arrayPost;
 			$arrayPost["command"] = "check";
             $curl = curl_init($api_url);
@@ -69,13 +68,13 @@ class checkTask extends AsyncTask
 			if($result["result"]["status"] == 99){
 				Server::getInstance()->getAsyncPool()->submitTask(new CheckTask($this->arrayPost, $player));
 				if(is_null($player)){		
-					continue;
+					return;
 				}	
 				$player->sendTip("Checking...");
 				return;
 			}
 			if(is_null($player)){		
-                continue;
+                return;
             }	
 			if($result["result"]["status"] == 2){
 				$txt = 
