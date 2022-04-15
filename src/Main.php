@@ -87,7 +87,7 @@ class Main extends PluginBase implements Listener{
         return (int) $convert*$core;
     }
 
-    public function getCommand(string $playername, int $amount): string{
+    public function getCMD(string $playername, int $amount): string{
         $subject = $this->getProvider()->config->getAll()["Command"];
         $search = ["{player}", "{amount}"];
         $replace = [$playername, $amount];
