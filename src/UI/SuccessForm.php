@@ -36,7 +36,7 @@ class SuccessForm{
     private function TypeOne(Player $player, int $value){
         if($player->isConnected()){
             $amount = $this->getPlugin()->convertValue($value);
-            $command = $this->getPlugin()->getCommand($player->getName(), $amount);
+            $command = $this->getPlugin()->getCMD($player->getName(), $amount);
             $server = new Server::getInstance();
             $server->getCommandMap()->dispatch(new ConsoleCommandSender($server, $server->getLanguage()), $command);
             TopUpCards::getInstance()->getProvider()->Add($player, $amount);
