@@ -18,15 +18,15 @@ class Main extends PluginBase implements Listener{
 
     protected Provider $provider;
 
-    private static $instance;
+    private static $instance = null;
 
-    protected function onLoad(): void
+    public function onLoad(): void
     {
         $this->provider = new Provider($this);
         self::$instance = $this;
     }
 
-    protected function onEnable(): void
+    public function onEnable(): void
     {
         $this->provider->open();
         Server::getInstance()->getCommandMap()->register('napthe', new NapThe($this));
